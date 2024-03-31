@@ -1,0 +1,63 @@
+<h1>Step 3: Summary</h1>
+<div *ngIf="modelResponse">
+  <h3>Your Tesla {{modelResponse.description}}</h3>
+  <div class="row" style="font-weight: bold;">
+    <div class="col-6">
+      {{newConfigDescription}}
+    </div>
+    <div class="col-6">
+      {{optionObjects.price | currency : 'USD'}}
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-6">
+      Range: {{optionObjects.range}} miles -
+      Max speed: {{optionObjects.speed}}
+    </div>
+  </div>
+
+  <div class="row" style="font-weight: bold;">
+    <div class="col-6">
+      {{ getColor().description }}
+    </div>
+    <div class="col-6">
+      {{ getColor().price | currency : 'USD'}}
+    </div>
+  </div>
+
+
+  <div *ngIf="storageValue.tow" class="row">
+    <div class="col-6">
+      Tow Hitch Package
+    </div>
+    <div class="col-6">
+      $1,000.00
+    </div>
+  </div>
+
+  <div *ngIf="storageValue.yoke" class="row">
+    <div class="col-6">
+      Yoke Package
+    </div>
+    <div class="col-6">
+      $1,000.00
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="row">
+    <div class="col-6">
+      TOTAL COST
+    </div>
+    <div class="col-6">
+      {{getTotal() | currency : 'USD'}}
+    </div>
+  </div>
+
+  <hr>
+
+  <img class="carImage" src="https://interstate21.com/tesla-app/images/{{colorCode}}/{{selectedModel.color}}.jpg">
+</div>
+
