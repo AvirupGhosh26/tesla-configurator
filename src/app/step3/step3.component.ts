@@ -45,7 +45,6 @@ export class Step3Component implements OnInit{
     (await this.teslaService.getOptions(this.colorCode)).subscribe((value) => {
       if (Object.keys(value).length > 0) {
        value.configs.filter((res, index) => {
-        console.log(res, index)
           if(index == this.storageValue.config){
             this.optionObjects = new ModelObjects()
             this.optionObjects = res
