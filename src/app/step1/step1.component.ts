@@ -18,18 +18,15 @@ import { TeslaService } from '../services/tesla.service';
   styleUrl: './step1.component.scss',
   providers: [TeslaService]
 })
-export class Step1Component implements OnInit, OnDestroy {
+export class Step1Component implements OnInit {
 
   level1Form!: FormGroup;
   models!: ModelResponse[];
   selectedModel!: ModelSelect;
-  newModel!: ModelResponse
-  imgUrl!: string
   colorCode!: string
   storageValue!: ModelSelect;
 
-  constructor(private teslaService: TeslaService) {
-  }
+  constructor(private teslaService: TeslaService) { }
 
   ngOnInit(): void {
     this.level1Form = new FormGroup({
@@ -41,7 +38,7 @@ export class Step1Component implements OnInit, OnDestroy {
 
   async getModel() {
     (await this.teslaService.getModels()).subscribe((res) => {
-      if(res.length > 0){
+      if (res.length > 0) {
         this.models = res
       }
       if (localStorage['carInfo'] && localStorage['colorCode']) {
@@ -51,13 +48,8 @@ export class Step1Component implements OnInit, OnDestroy {
           modelSelect: this.selectedModel.code,
           colorSelect: this.selectedModel.color
         });
-      
       }
     });
-  }
-
-  ngOnDestroy(): void {
-
   }
 
   onChange() {
@@ -73,11 +65,11 @@ export class Step1Component implements OnInit, OnDestroy {
         if ((i.toString() === this.level1Form.value?.modelSelect)) {
           this.colorCode = res.code
           localStorage.setItem('colorCode', JSON.stringify(this.colorCode))
-          //localStorage.removeItem('carConfigInfo')
         }
       })
     }
   }
+
 }
 
 

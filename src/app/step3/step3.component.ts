@@ -1,5 +1,5 @@
 import { CurrencyPipe, NgIf } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TeslaService } from '../services/tesla.service';
 import { ModelSelect } from '../models/model-select';
 import { ModelResponse } from '../models/model-response';
@@ -16,17 +16,16 @@ import { ModelObjects, ModelOptions } from '../models/model-options';
   styleUrl: './step3.component.scss',
   providers:[TeslaService]
 })
-export class Step3Component {
+export class Step3Component implements OnInit{
+
   selectedModel!: ModelSelect;
   modelResponse!: ModelResponse;
-  modelOptions!: ModelOptions;
   colorCode!: string;
   storageValue!:ModelSelect;
   optionObjects!: ModelObjects;
-  newConfigDescription!: string[]
+  newConfigDescription!: string
 
-  constructor(private teslaService: TeslaService) {
-  }
+  constructor(private teslaService: TeslaService) {}
 
   ngOnInit(): void {
    this.getOptions()
@@ -46,25 +45,29 @@ export class Step3Component {
     (await this.teslaService.getOptions(this.colorCode)).subscribe((value) => {
       if (Object.keys(value).length > 0) {
        value.configs.filter((res, index) => {
+        console.log(res, index)
           if(index == this.storageValue.config){
+            this.optionObjects = new ModelObjects()
             this.optionObjects = res
-            this.newConfigDescription = this.optionObjects.description.split(' - ')
           }
         });
       }
     })
   }
 
-  ngOnDestroy(): void {
+  getSetDescription(val: string){
+    const parts = val.split(' - ');
+    const result = parts.length > 1 ? parts[1] : val.split('-')[1];
+    return result
   }
 
-  getColor() {
+  getInfo() {
     return this.modelResponse.colors[this.modelResponse.colors.findIndex(x => x.code == this.selectedModel.color)]
   }
 
   getTotal() {
-    let total = this.optionObjects.price +
-      this.getColor().price;
+    let total = this.optionObjects?.price +
+      this.getInfo().price;
     if (this.storageValue.tow)
       total += 1000;
     if (this.storageValue.yoke)

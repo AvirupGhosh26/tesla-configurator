@@ -15,13 +15,13 @@
             <label for="colorSelect">Color:</label>
             <select id="colorSelect" name="colorSelect" formControlName="colorSelect" class="style-select">
                 <option value="" selected>Choose Color</option>
-                <option *ngFor="let color of models?.[level1Form.value?.modelSelect]?.colors;"
-                    value="{{color.code}}">{{color.description}}</option>
+                <option *ngFor="let color of models?.[level1Form.value?.modelSelect]?.colors;" value="{{color.code}}">
+                    {{color.description}}</option>
             </select>
         </div>
     </div>
 </form>
 
 <div *ngIf="level1Form.valid">
-      <img class="carImage" src="https://interstate21.com/tesla-app/images/{{colorCode}}/{{selectedModel.color}}.jpg">
+    <img class="carImage" src="https://interstate21.com/tesla-app/images/{{colorCode}}/{{selectedModel.color}}.jpg">
 </div>

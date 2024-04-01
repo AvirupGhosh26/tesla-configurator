@@ -6,7 +6,7 @@ import { stepBGuard } from './gaurds/step-b.guard';
 import { stepCGuard } from './gaurds/step-c.guard';
 
 export const routes: Routes = [
-    { path: '', redirectTo: 'level1', pathMatch: 'full' },
+    { path: '', redirectTo: 'step1', pathMatch: 'full' },
     {
       path: 'step1',
       component: Step1Component,

@@ -1,16 +1,16 @@
 <h1>Step 3: Summary</h1>
 <div *ngIf="modelResponse">
   <h3>Your Tesla {{modelResponse.description}}</h3>
-  <div class="row" style="font-weight: bold;">
+  <div class="row" style="font-weight: bold;" *ngIf="optionObjects">
     <div class="col-6">
-      {{newConfigDescription}}
+     {{ getSetDescription(optionObjects.description) }}
     </div>
     <div class="col-6">
       {{optionObjects.price | currency : 'USD'}}
     </div>
   </div>
 
-  <div class="row">
+  <div class="row" *ngIf="optionObjects">
     <div class="col-6">
       Range: {{optionObjects.range}} miles -
       Max speed: {{optionObjects.speed}}
@@ -19,13 +19,12 @@
 
   <div class="row" style="font-weight: bold;">
     <div class="col-6">
-      {{ getColor().description }}
+      {{ getInfo().description }}
     </div>
     <div class="col-6">
-      {{ getColor().price | currency : 'USD'}}
+      {{ getInfo().price | currency : 'USD'}}
     </div>
   </div>
-
 
   <div *ngIf="storageValue.tow" class="row">
     <div class="col-6">
@@ -60,4 +59,3 @@
 
   <img class="carImage" src="https://interstate21.com/tesla-app/images/{{colorCode}}/{{selectedModel.color}}.jpg">
 </div>
-

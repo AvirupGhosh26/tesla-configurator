@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {CurrencyPipe, NgForOf, NgIf} from "@angular/common";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import { ModelSelect } from '../models/model-select';
@@ -18,13 +18,12 @@ import { TeslaService } from '../services/tesla.service';
   styleUrl: './step2.component.scss',
   providers: [TeslaService]
 })
-export class Step2Component {
+export class Step2Component implements OnInit {
 
   level2Form!: FormGroup;
   selectedModel!: ModelSelect;
   optionsModel!: ModelOptions;
   optionObjects!: ModelObjects
-  selectedValue = new ModelSelect()
   colorCode!: string
 
 
