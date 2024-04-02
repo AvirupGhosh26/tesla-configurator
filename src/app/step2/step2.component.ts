@@ -42,7 +42,7 @@ export class Step2Component implements OnInit {
     this.selectedModel = JSON.parse(localStorage.getItem('carInfo') || '{}');
     this.colorCode = JSON.parse(localStorage.getItem('colorCode') || '{}');
     (await this.teslaService.getOptions(this.colorCode)).subscribe((res) => {
-      if (Object.keys(res).length > 0) {
+      if (Object.keys(res ?? {}).length > 0) {
         this.optionsModel = res
         this.level2Form.setValue({
           configSelect: '',

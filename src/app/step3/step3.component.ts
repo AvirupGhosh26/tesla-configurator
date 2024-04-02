@@ -14,21 +14,21 @@ import { ModelObjects, ModelOptions } from '../models/model-options';
   ],
   templateUrl: './step3.component.html',
   styleUrl: './step3.component.scss',
-  providers:[TeslaService]
+  providers: [TeslaService]
 })
-export class Step3Component implements OnInit{
+export class Step3Component implements OnInit {
 
   selectedModel!: ModelSelect;
   modelResponse!: ModelResponse;
   colorCode!: string;
-  storageValue!:ModelSelect;
+  storageValue!: ModelSelect;
   optionObjects!: ModelObjects;
   newConfigDescription!: string
 
-  constructor(private teslaService: TeslaService) {}
+  constructor(private teslaService: TeslaService) { }
 
   ngOnInit(): void {
-   this.getOptions()
+    this.getOptions()
   }
 
   async getOptions() {
@@ -36,16 +36,16 @@ export class Step3Component implements OnInit{
     this.colorCode = JSON.parse(localStorage.getItem('colorCode') || '{}');
     this.storageValue = JSON.parse(localStorage.getItem('carConfigInfo') || '{}');
     (await this.teslaService.getModels()).subscribe((res) => {
-        res.filter((x, index) =>{
-          if((index).toString() === this.selectedModel.code){
-            this.modelResponse = x
-          }
-        })
+      res.filter((x, index) => {
+        if ((index).toString() === this.selectedModel.code) {
+          this.modelResponse = x
+        }
+      })
     });
     (await this.teslaService.getOptions(this.colorCode)).subscribe((value) => {
       if (Object.keys(value).length > 0) {
-       value.configs.filter((res, index) => {
-          if(index == this.storageValue.config){
+        value.configs.filter((res, index) => {
+          if (index == this.storageValue.config) {
             this.optionObjects = new ModelObjects()
             this.optionObjects = res
           }
@@ -54,10 +54,15 @@ export class Step3Component implements OnInit{
     })
   }
 
-  getSetDescription(val: string){
-    const parts = val.split(' - ');
-    const result = parts.length > 1 ? parts[1] : val.split('-')[1];
-    return result
+  getSetDescription(val: string) {
+    switch (true) {
+      case val.includes(' - '):
+        return val.split(' - ')[1];
+      case val.includes('-'):
+        return val.split('-')[1];
+      default:
+        return val;
+    }
   }
 
   getInfo() {
