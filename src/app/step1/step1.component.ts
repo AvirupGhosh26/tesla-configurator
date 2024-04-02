@@ -41,9 +41,9 @@ export class Step1Component implements OnInit {
       if (res.length > 0) {
         this.models = res
       }
-      if (localStorage['carInfo'] && localStorage['colorCode']) {
-        this.selectedModel = JSON.parse(localStorage.getItem('carInfo') || '{}')
-        this.colorCode = JSON.parse(localStorage.getItem('colorCode') || '{}')
+      if (sessionStorage['carInfo'] && sessionStorage['colorCode']) {
+        this.selectedModel = JSON.parse(sessionStorage.getItem('carInfo') || '{}')
+        this.colorCode = JSON.parse(sessionStorage.getItem('colorCode') || '{}')
         this.level1Form.patchValue({
           modelSelect: this.selectedModel.code,
           colorSelect: this.selectedModel.color
@@ -56,7 +56,7 @@ export class Step1Component implements OnInit {
     this.selectedModel = new ModelSelect()
     this.selectedModel.code = this.level1Form.value?.modelSelect
     this.selectedModel.color = this.level1Form.value?.colorSelect
-    localStorage.setItem('carInfo', JSON.stringify(this.selectedModel))
+    sessionStorage.setItem('carInfo', JSON.stringify(this.selectedModel))
   }
 
   onSelectModel() {
@@ -64,7 +64,7 @@ export class Step1Component implements OnInit {
       this.models.filter((res, i) => {
         if ((i.toString() === this.level1Form.value?.modelSelect)) {
           this.colorCode = res.code
-          localStorage.setItem('colorCode', JSON.stringify(this.colorCode))
+          sessionStorage.setItem('colorCode', JSON.stringify(this.colorCode))
         }
       })
     }

@@ -3,7 +3,7 @@ import { CanActivateFn, Router } from '@angular/router';
 
 export const stepBGuard: CanActivateFn = (route, state) => {
   let router = inject(Router);
-  if (localStorage['carInfo'] && localStorage['colorCode']) {
+  if (sessionStorage['carInfo'] && sessionStorage['colorCode']) {
     return true;
   } else {
     // Redirect to login page if not authenticated

@@ -12,7 +12,7 @@ export class TeslaService {
 constructor(private httpClient: HttpClient) { }
 
  async getModels(): Promise <Observable<ModelResponse[]>>{
-    return this.httpClient.get<ModelResponse[]>('/models');
+    return this.httpClient.get<ModelResponse[]>('./models');
   }
 
   async getOptions(id: string): Promise <Observable<ModelOptions>>{

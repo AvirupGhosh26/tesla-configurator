@@ -4,7 +4,7 @@ import { ModelSelect } from '../models/model-select';
 
 export const stepCGuard: CanActivateFn = (route, state) => {
   let router = inject(Router);
-  let storageValue: ModelSelect = JSON.parse(localStorage.getItem('carConfigInfo') || '{}');
+  let storageValue: ModelSelect = JSON.parse(sessionStorage.getItem('carConfigInfo') || '{}');
   if (storageValue['config']) {
     return true;
   } else {

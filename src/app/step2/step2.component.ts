@@ -39,8 +39,8 @@ export class Step2Component implements OnInit {
   }
 
   async getOptions() {
-    this.selectedModel = JSON.parse(localStorage.getItem('carInfo') || '{}');
-    this.colorCode = JSON.parse(localStorage.getItem('colorCode') || '{}');
+    this.selectedModel = JSON.parse(sessionStorage.getItem('carInfo') || '{}');
+    this.colorCode = JSON.parse(sessionStorage.getItem('colorCode') || '{}');
     (await this.teslaService.getOptions(this.colorCode)).subscribe((res) => {
       if (Object.keys(res ?? {}).length > 0) {
         this.optionsModel = res
@@ -50,8 +50,8 @@ export class Step2Component implements OnInit {
           includeYoke: this.optionsModel.yoke
         });
       }
-      if (localStorage['carConfigInfo']) {
-        let storageValue: ModelSelect = JSON.parse(localStorage.getItem('carConfigInfo') || '{}');
+      if (sessionStorage['carConfigInfo']) {
+        let storageValue: ModelSelect = JSON.parse(sessionStorage.getItem('carConfigInfo') || '{}');
         this.level2Form.patchValue({
           configSelect: storageValue.config,
           includeTow: storageValue.tow,
@@ -78,7 +78,7 @@ export class Step2Component implements OnInit {
     selectedOption.config = this.level2Form.get('configSelect')?.valid ? this.level2Form.get('configSelect')?.value : '';
     selectedOption.tow = this.level2Form.get('includeTow')?.value
     selectedOption.yoke = this.level2Form.get('includeYoke')?.value
-    localStorage.setItem('carConfigInfo', JSON.stringify(selectedOption))
+    sessionStorage.setItem('carConfigInfo', JSON.stringify(selectedOption))
   }
 
 }

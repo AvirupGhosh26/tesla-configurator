@@ -32,9 +32,9 @@ export class Step3Component implements OnInit {
   }
 
   async getOptions() {
-    this.selectedModel = JSON.parse(localStorage.getItem('carInfo') || '{}');
-    this.colorCode = JSON.parse(localStorage.getItem('colorCode') || '{}');
-    this.storageValue = JSON.parse(localStorage.getItem('carConfigInfo') || '{}');
+    this.selectedModel = JSON.parse(sessionStorage.getItem('carInfo') || '{}');
+    this.colorCode = JSON.parse(sessionStorage.getItem('colorCode') || '{}');
+    this.storageValue = JSON.parse(sessionStorage.getItem('carConfigInfo') || '{}');
     (await this.teslaService.getModels()).subscribe((res) => {
       res.filter((x, index) => {
         if ((index).toString() === this.selectedModel.code) {
