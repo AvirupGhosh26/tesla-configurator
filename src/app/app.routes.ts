@@ -14,11 +14,11 @@ export const routes: Routes = [
     {
       path: 'step2',
       component: Step2Component,
-      canActivate: [stepBGuard]
+      //canActivate: [stepBGuard]
     },
     {
       path: 'step3',
       component: Step3Component,
-      canActivate: [stepCGuard]
+      //canActivate: [stepCGuard]
     },
   ];
